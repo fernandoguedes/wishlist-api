@@ -1,0 +1,24 @@
+{
+  "name": "wishlist-api",
+  "version": "1.0.0",
+  "description": "Wishlist API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "test": "mocha tests/"
+  },
+  "author": "Luís Fernando Guedes <lfernandoguedes@gmail.com> (https://fguedes.me)",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "^7.3.0",
+    "fastify": "^1.14.6",
+    "fastify-mongodb": "^0.9.1",
+    "fastify-swagger": "^0.15.3",
+    "mongoose": "^5.10.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "nodemon": "^1.19.4"
+  }
+}
