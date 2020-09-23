@@ -30,7 +30,8 @@ The documentation is acessible via `/documentation` path (`http://localhost:3000
 
 ## Tests
 
-```docker-compose up mongo
+```
+docker-compose up mongo
 npm t
 ```
 
