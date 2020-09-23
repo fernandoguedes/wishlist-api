@@ -43,3 +43,15 @@ exports.put = async (req, reply) => {
     throw boom.boomify(err)
   }
 }
+
+exports.delete = async (req, reply) => {
+  try {
+    const id = req.params.id;
+
+    await customersModel.findByIdAndRemove(id)
+
+    reply.code(204).send()
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}

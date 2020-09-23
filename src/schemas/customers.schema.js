@@ -63,3 +63,10 @@ exports.put = {
     additionalProperties: false
   }
 }
+
+exports.delete = {
+  description: 'Delete a customer',
+  tags: ['Customer'],
+  summary: 'Delete a customer by id',
+  params
+}

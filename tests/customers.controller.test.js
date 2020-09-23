@@ -152,4 +152,33 @@ describe('Customers', () => {
       done()
     })
   })
+
+  describe('Delete customer', () => {
+    test.only('should delete a customer on DELETE /customers with success', async (done) => {
+      const savedCustomer = await app.inject({
+        method: 'POST',
+        url: '/customers',
+        body: {
+          email: 'guedes@wishlist.com',
+          name: 'Wishlist et al'
+        }
+      })
+
+      const payload = JSON.parse(savedCustomer.payload)
+
+      await app.inject({
+        method: 'DELETE',
+        url: `/customers/${payload.id}`
+      })
+
+      const responseGet = await app.inject({
+        method: 'GET',
+        url: `/customers/${payload.id}`
+      })
+
+      expect(responseGet.statusCode).toBe(404)
+      done()
+    })
+  })
+
 })
