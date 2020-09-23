@@ -5,10 +5,11 @@ const customersModel = require('../src/models/customers.model')
 
 describe('Customers', () => {
   beforeAll(async () => {
-    await mongoose.connect('mongodb://root:root@localhost:27017/wishlist-tests?authSource=admin', {
+    await mongoose.connect('mongodb://localhost/wishlist-tests', {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     })
   })
 
@@ -35,11 +36,20 @@ describe('Customers', () => {
     })
   
     test('responds with error on request POST /customers when e-mail exists', async (done) => {
+      const customer = await app.inject({
+        method: 'POST',
+        url: '/customers',
+        body: {
+          email: 'duplicate@wishlist.com',
+          name: 'Wishlist et al'
+        }
+      })
+
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
         body: {
-          email: 'customer@wishlist.com',
+          email: 'duplicate@wishlist.com',
           name: 'Wishlist et al'
         }
       })
