@@ -30,3 +30,16 @@ exports.get = async (req, reply) => {
     throw boom.boomify(err)
   }
 }
+
+exports.put = async (req, reply) => {
+  try {
+    const id = req.params.id;
+    const customer = req.body
+
+    await customersModel.findByIdAndUpdate(id, req.body)
+
+    reply.code(204).send()
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
