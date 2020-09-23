@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "test": "jest --verbose --runInBand"
+    "test": "MONGO_URL=mongodb://root:root@localhost:27017/wishlist-tests?authSource=admin jest --verbose --runInBand",
+    "ci": "MONGO_URL=mongodb://localhost/wishlist-tests jest --verbose --runInBand"
   },
   "author": "Luís Fernando Guedes <lfernandoguedes@gmail.com> (https://fguedes.me)",
   "license": "ISC",
