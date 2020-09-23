@@ -1,3 +1,5 @@
+const mongoose = require('./config/mongoose').connection()
+
 const server = require('./app')({
   logger: {
     prettyPrint: true
