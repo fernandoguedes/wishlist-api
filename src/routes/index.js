@@ -1,5 +1,7 @@
 const customersController = require('../controllers/customer.controller')
+const wishlistController = require('../controllers/wishlist.controller')
 const customersSchema = require('../schemas/customers.schema')
+const wishlistSchema = require('../schemas/wishlists.schema')
 
 const routes = [
   {
@@ -30,6 +32,12 @@ const routes = [
     url: '/customers/:id',
     handler: customersController.delete,
     schema: customersSchema.delete
+  },
+  {
+    method: 'POST',
+    url: '/wishlist',
+    handler: wishlistController.add,
+    schema: wishlistSchema.add
   },
 ]
 
