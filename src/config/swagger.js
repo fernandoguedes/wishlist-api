@@ -10,6 +10,17 @@ exports.options = {
     host: 'localhost:3000',
     schemes: ['http'],
     consumes: ['application/json'],
-    produces: ['application/json']
+    produces: ['application/json'],
+    securityDefinitions: {
+      apiKey: {
+        type: 'apiKey',
+        name: 'token',
+        in: 'header'
+      }
+    },
+    security: [
+      { apiKey: [] }
+    ]
   }
 }
+
