@@ -28,7 +28,7 @@ describe('Customers', () => {
           name: 'Wishlist et al'
         }
       })
-  
+
       expect(response.statusCode).toBe(201)
       expect(JSON.parse(response.body)).toHaveProperty('id')
       done()
@@ -154,12 +154,12 @@ describe('Customers', () => {
   })
 
   describe('Delete customer', () => {
-    test.only('should delete a customer on DELETE /customers with success', async (done) => {
+    test('should delete a customer on DELETE /customers with success', async (done) => {
       const savedCustomer = await app.inject({
         method: 'POST',
         url: '/customers',
         body: {
-          email: 'guedes@wishlist.com',
+          email: 'etal@wishlist.com',
           name: 'Wishlist et al'
         }
       })
@@ -180,5 +180,4 @@ describe('Customers', () => {
       done()
     })
   })
-
 })
