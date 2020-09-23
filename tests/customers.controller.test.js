@@ -118,4 +118,38 @@ describe('Customers', () => {
       done()
     })
   })
+
+  describe('Update customer', () => {
+    test('should update a customer on PUT /customers with success', async (done) => {
+      const savedCustomer = await app.inject({
+        method: 'POST',
+        url: '/customers',
+        body: {
+          email: 'wishlist@wishlist.com',
+          name: 'Wishlist et al'
+        }
+      })
+
+      const payload = JSON.parse(savedCustomer.payload)
+
+      const responseUpdate = await app.inject({
+        method: 'PUT',
+        url: `/customers/${payload.id}`,
+        body: {
+          email: 'lfernandoguedes@gmail.com'
+        }
+      })
+
+      const responseGet = await app.inject({
+        method: 'GET',
+        url: `/customers/${payload.id}`
+      })
+
+      const body = JSON.parse(responseGet.body)
+
+      expect(responseUpdate.statusCode).toBe(204)
+      expect(body.email).toBe('lfernandoguedes@gmail.com')
+      done()
+    })
+  })
 })

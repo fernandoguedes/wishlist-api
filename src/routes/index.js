@@ -19,6 +19,12 @@ const routes = [
     handler: customersController.get,
     schema: customersSchema.get
   },
+  {
+    method: 'PUT',
+    url: '/customers/:id',
+    handler: customersController.put,
+    schema: customersSchema.put
+  },
 ]
 
 module.exports = routes
