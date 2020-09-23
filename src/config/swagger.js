@@ -1,4 +1,4 @@
-const HOST = process.env.HOST
+const HOST = process.env.HOST || 'localhost:3000'
 
 exports.options = {
   routePrefix: '/documentation',
@@ -9,7 +9,7 @@ exports.options = {
       description: 'A amazing API to manage wishlists of our customers',
       version: '1.0.0'
     },
-    host: 'localhost:3000',
+    host: HOST,
     schemes: ['http, https'],
     consumes: ['application/json'],
     produces: ['application/json'],
