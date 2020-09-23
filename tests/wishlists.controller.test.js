@@ -9,7 +9,8 @@ describe('Wishlists', () => {
     await mongoose.connect('mongodb://root:root@localhost:27017/wishlist-tests?authSource=admin', {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     })
   })
 
