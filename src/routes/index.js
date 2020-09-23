@@ -25,6 +25,12 @@ const routes = [
     handler: customersController.put,
     schema: customersSchema.put
   },
+  {
+    method: 'DELETE',
+    url: '/customers/:id',
+    handler: customersController.delete,
+    schema: customersSchema.delete
+  },
 ]
 
 module.exports = routes
