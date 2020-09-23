@@ -16,6 +16,7 @@
     "boom": "^7.3.0",
     "fastify": "^1.14.6",
     "fastify-swagger": "^0.15.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.6"
   },
   "devDependencies": {
