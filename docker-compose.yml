@@ -1,6 +1,21 @@
 version: '3.1'
 
 services:
+  api:
+    build: .
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    command: npm run start
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - ./:/usr/src/app:rw
+      - /usr/src/app/node_modules
+    environment:
+      MONGO_URL: mongodb://root:root@mongo:27017/wishlist?authSource=admin
+
   mongo:
     image: mongo
     restart: always
@@ -11,7 +26,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root 
     volumes:
-      - ./data:/data/db
+      - ./data/mongodb:/data/db
 
 volumes:
   data:

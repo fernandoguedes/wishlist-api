@@ -6,7 +6,7 @@ const server = require('./app')({
   }
 })
 
-server.listen(PORT, async (err) => {
+server.listen(PORT, '0.0.0.0', async (err) => {
   const mongoose = await require('./config/mongoose').connect()
 
   if (err) {
