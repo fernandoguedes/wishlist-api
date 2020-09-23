@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose --runInBand"
   },
   "author": "Luís Fernando Guedes <lfernandoguedes@gmail.com> (https://fguedes.me)",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "boom": "^7.3.0",
     "fastify": "^1.14.6",
     "fastify-swagger": "^0.15.3",
