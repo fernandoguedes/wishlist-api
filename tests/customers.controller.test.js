@@ -36,11 +36,20 @@ describe('Customers', () => {
     })
   
     test('responds with error on request POST /customers when e-mail exists', async (done) => {
+      const customer = await app.inject({
+        method: 'POST',
+        url: '/customers',
+        body: {
+          email: 'duplicate@wishlist.com',
+          name: 'Wishlist et al'
+        }
+      })
+
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
         body: {
-          email: 'customer@wishlist.com',
+          email: 'duplicate@wishlist.com',
           name: 'Wishlist et al'
         }
       })
