@@ -1,21 +1,16 @@
 const build = require('../src/app')
 const app = build()
-const mongoose = require('mongoose')
+const mongoose = require('../src/config/mongoose')
 const customersModel = require('../src/models/customers.model')
 
 describe('Customers', () => {
   beforeAll(async () => {
-    await mongoose.connect('mongodb://localhost/wishlist-tests', {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false
-    })
+    await mongoose.connect()
   })
 
   afterAll(async () => {
     await customersModel.deleteMany()
-    await mongoose.connection.close()
+    await mongoose.close()
     app.close()
   })
 

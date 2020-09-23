@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const MONGO_URL = process.env.MONGO_URL ||
   'mongodb://root:root@localhost:27017/wishlist?authSource=admin'
 
-const mongooseConnection = async () => {
+const connect = async () => {
   await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useCreateIndex: true,
@@ -11,4 +11,11 @@ const mongooseConnection = async () => {
   })
 }
 
-module.exports.connection = mongooseConnection
+const close = async () => {
+  mongoose.connection.close()
+}
+
+module.exports = {
+  connect,
+  close
+}
