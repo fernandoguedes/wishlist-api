@@ -5,7 +5,7 @@ const customersModel = require('../src/models/customers.model')
 
 describe('Customers', () => {
   beforeAll(async () => {
-    await mongoose.connect('mongodb://root:root@localhost:27017/wishlist-tests?authSource=admin', {
+    await mongoose.connect('mongodb://localhost/wishlist-tests', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
