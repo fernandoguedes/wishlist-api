@@ -41,3 +41,4 @@ npm t
 - MongoDB
 - Fastify
 - Swagger
+- Jest
