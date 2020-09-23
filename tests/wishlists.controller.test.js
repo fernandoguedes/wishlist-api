@@ -4,9 +4,27 @@ const mongoose = require('../src/config/mongoose')
 const wishlistModel = require('../src/models/wishlists.model')
 const customersModel = require('../src/models/customers.model')
 
+const headers = {
+  token: null 
+}
+
 describe('Wishlists', () => {
   beforeAll(async () => {
     await mongoose.connect()
+
+    const auth = await app.inject({
+      method: 'POST',
+      url: '/auth/login',
+      headers,
+      body: {
+        email: 'admin@wishlist.com',
+        password: '321mudar'
+      }
+    })
+
+    const payload = JSON.parse(auth.payload)
+
+    headers.token = payload.token 
   })
 
   afterAll(async () => {
@@ -22,6 +40,7 @@ describe('Wishlists', () => {
       const customer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'labs@wishlist.com',
           name: 'Wishlist et al'
@@ -33,6 +52,7 @@ describe('Wishlists', () => {
       const wishlist = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '77be5ad3-fa87-d8a0-9433-5dbcc3152fac',
           customer_id: body.id,
@@ -54,6 +74,7 @@ describe('Wishlists', () => {
       const customer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'different@wishlist.com',
           name: 'Wishlist et al'
@@ -65,6 +86,7 @@ describe('Wishlists', () => {
       const productWishlist1 = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '77be5ad3-fa87-d8a0-9433-5dbcc3152fac',
           customer_id: body.id,
@@ -74,6 +96,7 @@ describe('Wishlists', () => {
       const productWishlist2 = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
           customer_id: body.id,
@@ -102,6 +125,7 @@ describe('Wishlists', () => {
       const customer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'guedes@wishlist.com',
           name: 'Wishlist et al'
@@ -113,6 +137,7 @@ describe('Wishlists', () => {
       const wishlist = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '321abc',
           customer_id: body.id,
@@ -131,6 +156,7 @@ describe('Wishlists', () => {
       const customer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'hi@wishlist.com',
           name: 'Wishlist et al'
@@ -142,6 +168,7 @@ describe('Wishlists', () => {
       const productWishlist1 = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '77be5ad3-fa87-d8a0-9433-5dbcc3152fac',
           customer_id: body.id,
@@ -151,6 +178,7 @@ describe('Wishlists', () => {
       const productWishlist2 = await app.inject({
         method: 'POST',
         url: '/wishlist',
+        headers,
         body: {
           product_id: '77be5ad3-fa87-d8a0-9433-5dbcc3152fac',
           customer_id: body.id,

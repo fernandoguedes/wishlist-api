@@ -3,9 +3,26 @@ const app = build()
 const mongoose = require('../src/config/mongoose')
 const customersModel = require('../src/models/customers.model')
 
+const headers = {
+  token: null 
+}
+
 describe('Customers', () => {
   beforeAll(async () => {
     await mongoose.connect()
+
+    const auth = await app.inject({
+      method: 'POST',
+      url: '/auth/login',
+      body: {
+        email: 'admin@wishlist.com',
+        password: '321mudar'
+      }
+    })
+
+    const payload = JSON.parse(auth.payload)
+
+    headers.token = payload.token 
   })
 
   afterAll(async () => {
@@ -19,6 +36,7 @@ describe('Customers', () => {
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'customer@wishlist.com',
           name: 'Wishlist et al'
@@ -34,6 +52,7 @@ describe('Customers', () => {
       const customer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'duplicate@wishlist.com',
           name: 'Wishlist et al'
@@ -43,6 +62,7 @@ describe('Customers', () => {
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'duplicate@wishlist.com',
           name: 'Wishlist et al'
@@ -58,6 +78,7 @@ describe('Customers', () => {
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           name: 'Wishlist et al'
         }
@@ -72,6 +93,7 @@ describe('Customers', () => {
       const response = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'Wishlist et al'
         }
@@ -88,6 +110,7 @@ describe('Customers', () => {
       const savedCustomer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'customer@wishlist.com.br',
           name: 'Wishlist et al'
@@ -98,6 +121,7 @@ describe('Customers', () => {
 
       const response = await app.inject({
         method: 'GET',
+        headers,
         url: `/customers/${payload.id}`
       })
 
@@ -113,6 +137,7 @@ describe('Customers', () => {
     test('responds with 404 on request GET /customers when customer id not exists', async (done) => {
       const response = await app.inject({
         method: 'GET',
+        headers,
         url: `/customers/5f6a9e29fc90181c23e37c68`
       })
 
@@ -129,6 +154,7 @@ describe('Customers', () => {
       const savedCustomer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'wishlist@wishlist.com',
           name: 'Wishlist et al'
@@ -140,6 +166,7 @@ describe('Customers', () => {
       const responseUpdate = await app.inject({
         method: 'PUT',
         url: `/customers/${payload.id}`,
+        headers,
         body: {
           email: 'lfernandoguedes@gmail.com'
         }
@@ -147,6 +174,7 @@ describe('Customers', () => {
 
       const responseGet = await app.inject({
         method: 'GET',
+        headers,
         url: `/customers/${payload.id}`
       })
 
@@ -163,6 +191,7 @@ describe('Customers', () => {
       const savedCustomer = await app.inject({
         method: 'POST',
         url: '/customers',
+        headers,
         body: {
           email: 'etal@wishlist.com',
           name: 'Wishlist et al'
@@ -173,11 +202,13 @@ describe('Customers', () => {
 
       await app.inject({
         method: 'DELETE',
+        headers,
         url: `/customers/${payload.id}`
       })
 
       const responseGet = await app.inject({
         method: 'GET',
+        headers,
         url: `/customers/${payload.id}`
       })
 
