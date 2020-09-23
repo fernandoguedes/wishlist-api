@@ -10,8 +10,14 @@ const routes = [
   {
     method: 'POST',
     url: '/customers',
-    schema: customersSchema.addCustomerSchema,
-    handler: customersController.addCustomer
+    handler: customersController.add,
+    schema: customersSchema.add
+  },
+  {
+    method: 'GET',
+    url: '/customers/:id',
+    handler: customersController.get,
+    schema: customersSchema.get
   },
 ]
 
