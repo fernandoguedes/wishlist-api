@@ -1,3 +1,5 @@
+const HOST = process.env.HOST
+
 exports.options = {
   routePrefix: '/documentation',
   exposeRoute: true,
@@ -8,7 +10,7 @@ exports.options = {
       version: '1.0.0'
     },
     host: 'localhost:3000',
-    schemes: ['http'],
+    schemes: ['http, https'],
     consumes: ['application/json'],
     produces: ['application/json'],
     securityDefinitions: {
